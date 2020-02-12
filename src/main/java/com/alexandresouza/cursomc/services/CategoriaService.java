@@ -2,12 +2,12 @@ package com.alexandresouza.cursomc.services;
 
 import java.util.Optional;
 
-import com.alexandresouza.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alexandresouza.cursomc.domain.Categoria;
 import com.alexandresouza.cursomc.repositories.CategoriaRepository;
+import com.alexandresouza.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -20,5 +20,10 @@ public class CategoriaService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 
+	}
+	
+	public Categoria insert(Categoria obj) {
+		obj.setId(null);
+		return repo.save(obj); 
 	}
 }
